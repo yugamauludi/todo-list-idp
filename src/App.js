@@ -51,6 +51,11 @@ function App() {
       );
     }
 
+    const deleteAllTasks = () => {
+      setListTask([]);
+    };
+  
+
     const checkTask = (task) => {
       setListTask(
         listTask.map(t => {
@@ -100,6 +105,7 @@ function App() {
         tasks={showListTask}
         deleteHandler={deleteTask}
         checkHandler={checkTask}
+        deleteAllHandler={deleteAllTasks}
       />
     </div>
   );
