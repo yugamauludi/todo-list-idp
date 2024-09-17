@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import Header from './components/Header';
 import Todos from './components/Todos';
 import './App.css';
+import Swal from 'sweetalert2';
 
 function App() {
     const todos = [
@@ -79,19 +80,28 @@ function App() {
   
     useEffect(() => {
       if( sort === 'All') {
-          setShowListTask(
-            listTask
-          )
+        setShowListTask(
+          listTask
+        )
       } else if ( sort === 'Incomplete') {
-          let sortedListTasks = listTask.filter( t =>  !t.status  );
-          setShowListTask(
-            sortedListTasks
-          )
+        let sortedListTasks = listTask.filter( t =>  !t.status  );
+        setShowListTask(
+          sortedListTasks
+        )
       } else {
-          let sortedListTasks = listTask.filter( t => t.status  );
-          setShowListTask(
-            sortedListTasks
-          )
+        let sortedListTasks = listTask.filter( t => t.status  );
+        setShowListTask(
+          sortedListTasks
+        )
+      }
+
+      if (listTask.length > 0 && listTask.every(t => t.status )) {
+        Swal.fire({
+          icon: 'success',
+          title: 'All tasks are completed!',
+          text: 'Congratulations, all tasks have been marked as done!',
+          confirmButtonText: 'Awesome!'
+        });
       }
     },[listTask, sort])
   return (
